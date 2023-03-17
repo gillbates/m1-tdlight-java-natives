@@ -10,6 +10,7 @@
 # (and replace "amd64" with "aarch64" inside)
 
 # MAIN REQUIRED ENVIRONMENT VARIABLES:
+brew install cmake
 brew install maven
 brew install openssl
 brew install coreutils
