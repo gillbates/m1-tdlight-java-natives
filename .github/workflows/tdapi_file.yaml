@@ -2,6 +2,9 @@ name: Generate TdApi.java
 
 on:
   push:
+    branches:
+      - master
+      - develop
 
 jobs:
   build:
@@ -28,18 +31,20 @@ jobs:
         with:
           submodules: "recursive"
       - name: Setup Java (Snapshot)
-        if: github.ref != 'refs/heads/master'
-        uses: actions/setup-java@v1
+        if: github.ref == 'refs/heads/develop'
+        uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: temurin
           server-id: mchv-snapshot-distribution
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Setup Java (Release)
-        if: github.ref == 'refs/heads/master'
-        uses: actions/setup-java@v1
+        if: github.ref != 'refs/heads/develop'
+        uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: temurin
           server-id: mchv-release-distribution
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
